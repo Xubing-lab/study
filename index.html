@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仿生Janus/微流控实验室 - 苏州科技大学</title>
+  <link rel="short icon" href="https://cdn.jsdelivr.net/gh/Xubing-lab/photo/23.png" />
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: #1a365d;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #63b3ed;
+        }
+        
+        /* 主要内容区域 */
+        main {
+            padding: 2rem 0;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+        
+        h2 {
+            color: #1a365d;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        /* 实验室简介布局 */
+        .lab-intro {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .lab-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .lab-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .lab-text ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .lab-text li {
+            margin-bottom: 0.5rem;
+        }
+        
+ /* 轮播容器 */
+.carousel {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+
+/* 每页高度 */
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 640px; /* 每张图大约300px，两张图+间距 */
+}
+
+.carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-item.active {
+    opacity: 1;
+}
+
+/* 上下两张图容器 */
+.slide-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+/* 单个图块 */
+.slide-block {
+    flex: 1;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.slide-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 黑色字幕条 */
+.slide-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.65);
+    color: #fff;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 15px;
+}
+
+/* 数字指示器 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.carousel-indicators span {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.7);
+    color: #1a365d;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+.carousel-indicators span:hover,
+.carousel-indicators span.active {
+    background: #e60026;
+    color: #fff;
+}
+        
+        /* 8张静态小图 */
+        .gallery {
+            margin-top: 40px;
+        }
+        
+        .gallery-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,.1);
+        }
+        
+        .gallery-item p {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        /* 底部蓝色条 */
+        footer {
+            background-color: #1a365d;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-content p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .lab-intro {
+                flex-direction: column;
+            }
+            
+            .gallery-row {
+                flex-wrap: wrap;
+            }
+            
+            .gallery-item {
+                flex: 0 0 48%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://cdn.jsdelivr.net/gh/Xubing-lab/photo/23.png" alt="Lab Logo">
+                <h1>仿生Janus/微流控实验室</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="https://xubing-lab.github.io/home/" style="color: #FFEC50; font-weight: bold;">网站首页</a></li>
+                    <li><a href="sysjs.html">实验室简介</a></li>
+                    <li><a href="hjqk.html">获奖情况</a></li>
+                    <li><a href="js.html">研究团队</a></li>
+                    <li><a href="kycg.html">科研成果</a></li>
+                    <li><a href="xmzl.html">项目专利</a></li>
+                  <li><a href="rctj.html">日常团建</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="intro">
+            <h2>关于我们</h2>
+            <div class="lab-intro">
+                <div class="lab-text">
+                    <p>课题组隶属于苏州科技大学机械工程学院与化学与生命科学学院，聚焦于Janus、微流控芯片技术、智能材料及疾病床边检测（POCT）领域，形成了跨学科的研究特色。</p>
+                    <p>实验室已与中国科学技术大学、南昌大学、大连理工大学等国内多所知名高校和企业建立了紧密的合作关系。</p>
+                    <p>我们的研究方向包括：</p>
+                    <ul>
+                      <li>医工结合</li>
+                      <li>舒适性研究</li>
+                        <li>Janus</li>
+                        <li>微流控</li>
+                    </ul>
+                    <p>本实验室的核心愿景，是致力于研发能够真正融入日常生活的Janus智能穿戴织物。</p>
+                  <p>我们以解决实际医工结合难题为驱动，力求使Janus衣物不仅能针对性地提供健康监测、生理调节等多元化解决方案，更将推动其实现规模化、产业化发展。</p>
+                  <p>最终，我们期望通过科技提升穿戴者的日常舒适性与生活品质，为实现人类健康寿命的延长贡献力量。</p>
+                </div>
+
+<!-- 右侧轮播图：每页上下两张图，共5页 -->
+<div class="carousel">
+    <div class="carousel-inner">
+        <!-- 第1页 -->
+        <div class="carousel-item active">
+            <div class="slide-row">
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xpdbibj7j30z60lukan.jpg" alt="图1">
+                    <div class="slide-caption">奇点Janus膜</div>
+                </div>
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xpdc17hij31420p37go.jpg" alt="图2">
+                    <div class="slide-caption">基于激光识别的血型分析</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第2页 -->
+        <div class="carousel-item">
+            <div class="slide-row">
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xpdcd4xej31910l31im.jpg" alt="图3">
+                    <div class="slide-caption">快干Janus面料</div>
+                </div>
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xpdb7exdj30vy0i7wv9.jpg" alt="图4">
+                    <div class="slide-caption">单向阀Janus膜</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第3页 -->
+        <div class="carousel-item">
+            <div class="slide-row">
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xpdaq6vzj310f0ofk6t.jpg" alt="图5">
+                    <div class="slide-caption">微流体砖泵</div>
+                </div>
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xpdf452fj319b0t4trq.jpg" alt="图6">
+                    <div class="slide-caption">大气压血浆分离</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第4页 -->
+        <div class="carousel-item">
+            <div class="slide-row">
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xpdd8yhhj315x0zj7uo.jpg" alt="图7">
+                    <div class="slide-caption">Janus降温贴</div>
+                </div>
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xpdcu8vqj31310pjqe1.jpg" alt="图8">
+                    <div class="slide-caption">基于微流控棉线的血型鉴定</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第5页 -->
+        <div class="carousel-item">
+            <div class="slide-row">
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xpjoeenjj312i0tg1kx.jpg" alt="图9">
+                    <div class="slide-caption">Janus-shedding织物</div>
+                </div>
+                <div class="slide-block">
+                    <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xpjp1cquj316k0j8h4l.jpg" alt="图10">
+                    <div class="slide-caption">译码解码Janus纸</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 数字指示器：5页 -->
+    <div class="carousel-indicators">
+        <span class="active" data-slide="0">1</span>
+        <span data-slide="1">2</span>
+        <span data-slide="2">3</span>
+        <span data-slide="3">4</span>
+        <span data-slide="4">5</span>
+    </div>
+</div>
+            </div>
+        </section>
+
+        <!-- 8张静态小图 -->
+        <section id="gallery-section">
+            <div class="gallery">
+                <div class="gallery-row">
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xpjkc2r6j30r70ccq8l.jpg" alt="Image 1">
+                        <p>多功能微流控“粒子二极管”</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xpdh7nqtj316j0j84bo.jpg" alt="Image 2">
+                        <p>单线程3D微流体分析设备</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xpdi9bkzj319n0tmkfo.jpg" alt="Image 3">
+                        <p>条形码血型检测系统</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xpdazi0xj30us0t17kb.jpg" alt="Image 4">
+                        <p>flash血浆分离</p>
+                    </div>
+                </div>
+
+                <div class="gallery-row">
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xpjtk2ghj30rh0pstp9.jpg" alt="Image 5">
+                        <p>Janus运动文胸</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xpdbtaswj315s0lrh6d.jpg" alt="Image 6">
+                        <p>叶尖Janus织物</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xpjpsz7qj317c0ms1kx.jpg" alt="Image 7">
+                        <p>Janus防静电防护服</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xpjqbi8pj319a0x24qp.jpg" alt="Image 8">
+                        <p>热湿管理Janus面料</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部蓝色条 -->
+    <footer>
+        <div class="container footer-content">
+            <p><strong>苏州科技大学  Janus/微流控实验室</strong></p>
+            <p>地址：苏州市滨河路298号   联系电话：18856923509</p>
+        </div>
+    </footer>
+
+    <!-- 轮播脚本 -->
+    <script>
+        const items = document.querySelectorAll('.carousel-item');
+        const indicators = document.querySelectorAll('.carousel-indicators span');
+        let current = 0;
+
+        function showSlide(index) {
+            items[current].classList.remove('active');
+            indicators[current].classList.remove('active');
+            current = index;
+            items[current].classList.add('active');
+            indicators[current].classList.add('active');
+        }
+
+        function showNext() {
+            let next = (current + 1) % items.length;
+            showSlide(next);
+        }
+
+        // 每3秒自动切换
+        let autoSlide = setInterval(showNext, 3000);
+
+        // 点击数字切换
+        indicators.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(autoSlide);  // 停止自动轮播
+                showSlide(index);
+                autoSlide = setInterval(showNext, 3000); // 重新启动自动轮播
+            });
+        });
+    </script>
+</body>
+</html>

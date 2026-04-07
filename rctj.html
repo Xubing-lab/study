@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日常团建 - 仿生Janus/微流控实验室</title>
+  <link rel="short icon" href="https://cdn.jsdelivr.net/gh/Xubing-lab/photo/23.png" />
+  <!-- ===== 页面通用样式 ===== -->
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:"Segoe UI","Microsoft YaHei",Arial,sans-serif;background:#f8f9fa;color:#333;line-height:1.6;}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+    /* 顶部导航栏 */
+    header{background:#1a365d;color:#fff;padding:1rem 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 5px rgba(0,0,0,.1);}
+    .header-content{display:flex;justify-content:space-between;align-items:center;}
+    .logo{display:flex;align-items:center;}
+    .logo img{height:40px;margin-right:10px;}
+    .logo h1{font-size:1.5rem;margin-left:10px;}
+    nav ul{display:flex;list-style:none;}
+    nav ul li{margin-left:1.5rem;}
+    nav ul li a{color:white;text-decoration:none;font-weight:500;transition:color .3s;}
+    nav ul li a:hover{color:#63b3ed;}
+    nav ul li a.active{color:#FFD700;font-weight:bold;}
+
+    /* 左右分栏 */
+    .content-wrapper{display:flex;margin-top:2rem;gap:2rem;align-items:flex-start;}
+    .left-panel{flex:1;background:none;box-shadow:none;padding:0;}
+    .right-panel{width:200px;}
+
+    /* 右侧导航 */
+    .sidebar {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2rem;
+            white-space: nowrap;
+           position:fixed;
+          text-align: center;
+        }
+
+        .sidebar h3 {
+            color: #1a365d;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .sidebar a {
+            display: block;
+            margin-bottom: 1rem;
+            color: #1a365d;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a.active {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .sidebar a:not(.active):hover {
+            background-color: #f1f5f9;
+        }
+
+    
+
+    /* 年份卡片通用样式 */
+    .year-card{background:#fff;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,.05);padding:2rem;margin-bottom:2rem;}
+    .year-card h2{color:#1a365d;border-bottom:2px solid #e2e8f0;padding-bottom:0.5rem;margin-bottom:1rem;}
+
+    /* ===== 照片墙核心样式 ===== */
+    .photo-wall{position:relative;width:100%;margin-top:1rem;}
+    .photo-wall img{position:absolute;width:275px;height:206.25px;object-fit:cover;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,.15);transition:.3s;}
+    .photo-wall img:hover{transform:scale(1.05) rotate(0deg)!important;z-index:10;}
+    /* 以后加照片：照下面格式继续写 .pX 即可 */
+    .p1{top:10px;left:0;transform:rotate(-5deg);z-index:1;}
+    .p2{top:20px;left:300px;transform:rotate(4deg);z-index:2;}
+    .p3{top:5px;left:600px;transform:rotate(-3deg);z-index:3;}
+    .p4{top:250px;left:5px;transform:rotate(6deg);z-index:4;}
+    .p5{top:265px;left:310px;transform:rotate(-4deg);z-index:5;}
+    .p6{top:255px;left:600px;transform:rotate(3deg);z-index:6;}   /* 注意 = 改 : */
+    .p7{top:500px;left:0;transform:rotate(-7deg);z-index:7;}
+    .p8{top:515px;left:300px;transform:rotate(-3deg);z-index:8;}
+    .p9{top:525px;left:600px;transform:rotate(6deg);z-index:9;}
+    .p10{top:750px;left:5px;transform:rotate(6deg);z-index:10;}
+    .p11{top:735px;left:310px;transform:rotate(-4deg);z-index:11;}
+    .p12{top:760px;left:600px;transform:rotate(3deg);z-index=12;}
+    .p13{top:1000px;left:5px;transform:rotate(-4deg);z-index:13;}
+    .p14{top:985px;left:310px;transform:rotate(1deg);z-index:14;}
+    .p15{top:999px;left:600px;transform:rotate(-3deg);z-index=15;}
+    /* ===== 想继续加 .p7、.p8 … 写在下面即可 ===== */
+
+    footer{background:#1a365d;color:white;padding:2rem 0;margin-top:3rem;text-align:center;}
+  </style>
+</head>
+<body>
+
+<!-- ===== 顶部导航（保持不变） ===== -->
+<header>
+  <div class="container header-content">
+    <div class="logo">
+      <img src="https://cdn.jsdelivr.net/gh/Xubing-lab/photo/23.png" alt="Lab Logo">
+      <h1>仿生Janus/微流控实验室</h1>
+    </div>
+    <nav>
+      <ul>
+         <li><a href="https://xubing-lab.github.io/home/">网站首页</a></li>
+                    <li><a href="sysjs.html">实验室简介</a></li>
+                    <li><a href="hjqk.html">获奖情况</a></li>
+                    <li><a href="js.html">研究团队</a></li>
+                    <li><a href="kycg.html">科研成果</a></li>
+                    <li><a href="xmzl.html">项目专利</a></li>
+                  <li><a href="rctj.html" style="color: #FFEC50; font-weight: bold;">日常团建</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== 主体内容区 ===== -->
+<div class="container content-wrapper">
+
+  <!-- 左侧：每年一座照片墙 -->
+  <div class="left-panel">
+
+     <!-- ★★★ 2026 年照片墙 ★★★ -->
+     <div id="y2026" class="year-card">
+      <h2>2026.1.21</h2>
+      <div class="photo-wall" style="min-height:1200px">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i9jqqqw7muj31n918g147.jpg" class="p1">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i9jqqusdtdj31400u00xb.jpg" class="p2">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i9jqqqf4z4j31n918gak1.jpg" class="p3">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i9jqqt5ixuj31n918gdmu.jpg" class="p4">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i9jqqu112qj318g1n9gtd.jpg" class="p5">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i9jqqtlzhgj31400u0tem.jpg" class="p6">
+        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i9jqqswybjj31n918gtfl.jpg" class="p7">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i9jqqtem3vj31n918gqdh.jpg" class="p8">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i9jqqu9lqnj327018gtip.jpg" class="p9">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i9jqqtug9sj318g1n9the.jpg" class="p10">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i9jqqugvaqj31n918gtkk.jpg" class="p11">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i9jqquyx2sj31400u0jwj.jpg" class="p12">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i9jqqv581jj31400u0wjh.jpg" class="p13">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i9jqqvj1bmj31400u0jxd.jpg" class="p14">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i9jqqvb39bj31400u00x4.jpg" class="p15">
+        <!-- 加第 7 张：先写下面这行 HTML，再去 CSS 写 .p7{...} -->
+        <!-- <img src="你的图" class="p7"> -->
+      </div>
+    </div>
+    
+    <!-- ★★★ 2025 年照片墙 ★★★ -->
+     <div id="y2025" class="year-card">
+      <h2>2025.12.24</h2>
+      <!-- 照片墙：已放 6 张，想加图继续写 <img class="p7"> + .p7{...} -->
+      <div class="photo-wall" style="min-height:500px">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i8n0vmki1ij335s1s01ky.jpg" class="p1">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i8n0vqgdiwj335c1rsqv5.jpg" class="p2">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i9jpw60e5ij335s1s07wi.jpg" class="p3">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i8n0vvmle2j335s1s04qq.jpg" class="p4">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i8n0vssed9j335s1s01ky.jpg" class="p5">
+        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i8n0vxc8v7j335s1s0e82.jpg" class="p6">
+        <!-- 加第 7 张：先写下面这行 HTML，再去 CSS 写 .p7{...} -->
+        <!-- <img src="你的图" class="p7"> -->
+      </div>
+    </div>
+    
+     <div id="y2025" class="year-card">
+      <h2>2025.12.2</h2>
+      <!-- 照片墙：已放 6 张，想加图继续写 <img class="p7"> + .p7{...} -->
+      <div class="photo-wall" style="min-height:750px">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xqg9cxccj32003k0kjm.jpg" class="p1">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xqgb7cagj30zj1r7tdt.jpg" class="p2">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqgaj83fj30zj1r77a9.jpg" class="p3">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xqg9v7r8j31r70zj487.jpg" class="p4">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i9jpu1vcgej308z0f6dg7.jpg" class="p5">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xqgb0y1pj31r70zjaig.jpg" class="p6">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqga44laj31be0zjwtd.jpg" class="p7">
+        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xqgasgi8j31be0zj148.jpg" class="p8">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqgac5idj31ba0zgwle.jpg" class="p9">
+        <!-- 加第 7 张：先写下面这行 HTML，再去 CSS 写 .p7{...} -->
+        <!-- <img src="你的图" class="p7"> -->
+      </div>
+    </div>
+    
+    
+    <div id="y2025" class="year-card">
+      <h2>2025.11.15</h2>
+      <!-- 照片墙：已放 6 张，想加图继续写 <img class="p7"> + .p7{...} -->
+      <div class="photo-wall" style="min-height:1200px">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xq6n9fwgj31400u0jzo.jpg" class="p1">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xq6ntch5j31be0zjajo.jpg" class="p2">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xq6o9iawj30u01hbgsz.jpg" class="p3">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xq6y083oj318g2704i5.jpg" class="p4">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xq6u6fbvj318g270wxp.jpg" class="p5">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xq6vswycj318g270wvz.jpg" class="p6">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xq6pl97sj30u01hcqac.jpg" class="p7">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xq6rtta4j31hc0u0dpv.jpg" class="p8">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xq72cimyj31400u079n.jpg" class="p9">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xq6yeqslj31400u0aed.jpg" class="p10">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xq72un31j31400u0q72.jpg" class="p11">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xq6wjjp1j31400u0n0z.jpg" class="p12">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xq73bhulj31400u0q6k.jpg" class="p13">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xq6jp4tgj31400u0q75.jpg" class="p14">
+        <img src="https://dlink.host/tvax2.sinaimg.cn/large/008FL5SJgy1i7xq6mj1hgj31400u0whi.jpg" class="p15">
+        <!-- 加第 7 张：先写下面这行 HTML，再去 CSS 写 .p7{...} -->
+        <!-- <img src="你的图" class="p7"> -->
+      </div>
+    </div>
+
+    <!-- ★★★ 2024 年照片墙 ★★★ -->
+    <div id="y2024" class="year-card">
+      <h2>2024 年</h2>
+      <div class="photo-wall" style="min-height:750px">
+        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xqdvxqccj31be0zjqdb.jpg" class="p1">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqdvkz0yj31be0zj7dg.jpg" class="p2">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqe6h8hfj31ba0zggrp.jpg" class="p3">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqe5ek83j31be0zj158.jpg" class="p4">
+        <img src="https://dlink.host/tvax4.sinaimg.cn/large/008FL5SJgy1i7xqe37ztjj34eo3b0e85.jpg" class="p5">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqee583ij335s2dcqv8.jpg" class="p6">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqear5xgj335s2dcqv6.jpg" class="p7">
+        <img src="https://dlink.host/tvax3.sinaimg.cn/large/008FL5SJgy1i7xqe687m4j31be0zjjxk.jpg" class="p8">
+        <img src="https://dlink.host/tvax1.sinaimg.cn/large/008FL5SJgy1i7xqe5xy6pj31be0zjwr9.jpg" class="p9">
+        <!-- 继续加... -->
+      </div>
+    </div>
+
+    <!-- ★★★ 想再加 2021 年？照抄下面整块 ★★★ -->
+    <!--
+    <div id="y2021" class="year-card">
+      <h2>2021 年</h2>
+      <div class="photo-wall">
+        <img src="你的图" class="p1">
+        <img src="你的图" class="p2">
+        <img src="你的图" class="p3">
+      </div>
+    </div>
+    -->
+
+  </div><!-- /left-panel -->
+
+  <!-- 右侧：年份快速导航 -->
+  <div class="right-panel">
+    <div class="sidebar" style="background: #94ACB3; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 2rem; white-space: nowrap;">
+      <h3 style="color: #FFEC50; margin-bottom: 0.5rem;">日常团建</h3>
+      <hr style="margin: 1rem 0; border: none; border-top: 1px solid #FFEC50;">
+      <a href="#y2026" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2026年</a>
+      <a href="#y2025" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2025年</a>
+      <a href="#y2024" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2024年</a>
+      <!-- 如果新增 2021 年，在这里再加一行 -->
+      <!-- <a href="#y2021">2021年</a> -->
+    </div>
+  </div>
+
+</div><!-- /content-wrapper -->
+
+<!-- ===== 底部 ===== -->
+<footer>
+  <div class="container">
+    <p><strong>苏州科技大学  Janus/微流控实验室</strong></p>
+    <p>地址：苏州市滨河路298号 &nbsp; 联系电话：18856923509</p>
+  </div>
+</footer>
+
+</body>
+</html>

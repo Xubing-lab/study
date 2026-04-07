@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科研成果 - 仿生Janus/微流控实验室</title>
+  <link rel="short icon" href="https://cdn.jsdelivr.net/gh/Xubing-lab/photo/23.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #1a365d;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+       .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #63b3ed;
+        }
+
+        nav ul li a.active {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        /* 下方内容区域：左右完全分隔 */
+        .content-wrapper {
+            display: flex;
+            margin-top: 2rem;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        /* 左侧栏：宽度由内容决定 */
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2rem;
+            white-space: nowrap;
+           position:fixed;
+          text-align: center;
+        }
+
+        .sidebar h3 {
+            color: #1a365d;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .sidebar a {
+            display: block;
+            margin-bottom: 1rem;
+            color: #1a365d;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a.active {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .sidebar a:not(.active):hover {
+            background-color: #f1f5f9;
+        }
+
+        /* 右侧内容区：剩余宽度全占 */
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+        .main-content1 {
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            text-align: center; /* ✅ 新增：让内容居中 */
+        }
+      
+        .main-content img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1rem;
+            border-radius: 6px;
+        }
+
+        /* 右侧年份导航固定 */
+        .side-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 100px;          /* 距离顶部多少像素开始固定 */
+            align-self: flex-start;
+        }
+
+        /* 新增：左右分栏固定宽度 */
+        .left-panel {
+            width: 1000px;
+            margin-right: 2rem;
+        }
+        .right-panel {
+            width: 200px;
+        }
+     /* 底部蓝色条 */
+        footer {
+            background-color: #1a365d;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-content p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://cdn.jsdelivr.net/gh/Xubing-lab/photo/23.png" alt="Lab Logo">
+                <h1>仿生Janus/微流控实验室</h1>
+            </div>
+            <nav>
+                <ul>
+                   <li><a href="https://xubing-lab.github.io/home/">网站首页</a></li>
+                    <li><a href="sysjs.html">实验室简介</a></li>
+                    <li><a href="hjqk.html">获奖情况</a></li>
+                    <li><a href="js.html">研究团队</a></li>
+                    <li><a href="kycg.html" style="color: #FFEC50; font-weight: bold;">科研成果</a></li>
+                    <li><a href="xmzl.html">项目专利</a></li>
+                  <li><a href="rctj.html">日常团建</a></li>
+              </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container content-wrapper">
+        <!-- 左侧：内容区（年份独立卡片） -->
+        <div class="left-panel" style="background: none; box-shadow: none; padding: 0;">
+
+             <section id="y2026" style="margin-bottom: 2rem; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 2rem;">
+                <h2 style="color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">2026年</h2>
+       <p>1.	Lu, Junyi, et al. "Skin-triggered Janus physical cooling patches for prolonged evaporative cooling and superior comfort" <strong>Chemical Engineering Journal</strong> 533 (2026): 174561.</p><br>       
+       <p>2.	Zhang, Weijie, et al. "Large-pore Janus membrane for ultrafast unidirectional liquid transport." <strong>Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 740 (2026): 140166.</p><br>
+       
+          </section>
+          
+            <section id="y2025" style="margin-bottom: 2rem; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 2rem;">
+                <h2 style="color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">2025年</h2>
+       <p>1.	Lu, Zhiqi, et al. "Single-Sheet Multilayer µPADs fabricated by Hand-Tearing and PDMS Stamping." <strong>Sensors and Actuators B: Chemical</strong> 444 (2025): 138318.</p><br>       
+       <p>2.	Luo, Haojun, et al. "Janus antistatic protective clothing for personal sweat management and electrostatic protection." <strong>Chemical Engineering Journal</strong> 510 (2025): 161507.</p><br>
+       <p>3.	Wu, Yulun, et al. "Multi‐Bioinspired 3D Leaf Apex‐Like Janus Fabrics with Excellent Gravity‐Induced Sweat Shedding." <strong>Advanced Functional Materials</strong> 36.7 (2025): e13301.</p><br>
+       <p>4.	Zhan, Tonghuan, et al. "Atmospheric pressure difference centrifuge for stable and consistent plasma separation." <strong>Sensors and Actuators B: Chemical</strong> 426 (2025): 137143.</p><br>
+       <p>5.	Xu, Zixuan, et al. "Highly flexible Janus fabric based on TPU spraying and laser processing for personal thermal-wet management." <strong>Chemical Engineering Journal</strong> 522 (2025): 167553.</p><br>
+       <p>6.	Chen, Zhihao, et al. "Inverted conical pore enhancement mechanism for improving reverse breakthrough pressure of a Janus membrane." <strong>Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 708 (2025): 135972.</p><br>
+       <p>7.	Min, Shuqiang, et al. "Janus Membranes with On-Demand Control of Droplets Used in Blood Testing and Information Encryption." <strong>ACS Applied Materials & Interfaces</strong> 17.22 (2025): 33211–33220.</p><br>
+       <p>8.	Yu, Xiaohua, et al. "True “Liquid Diode”: Check Valve@ Janus Membrane to Achieve an Extremely High Reverse Breakthrough Pressure." <strong>ACS Applied Materials & Interfaces</strong> 17.15 (2025): 23286-23294.</p><br>
+       <p>9.	Zhan, Tonghuan, et al. "3D microfluidic analytical device on a single thread for smart point-of-care blood typing." <strong>Lab on a Chip</strong> 25.11 (2025): 2769-2779.</p><br>
+       <p>10.	Wu, Xianchang, et al. "Flash: Dual-gradient Filtering Membranes Enable Ultra-fast Plasma Separation." <strong>Analytica Chimica Acta</strong> 1368 (2025): 344269.</p><br>
+       <p>11.	Chen, Chunrui, et al. "Barcode-integrated cellulose based microfluidic system for intelligent point-of-care blood typing." <strong>Lab on a Chip</strong> 25.21 (2025): 5628-5637.</p><br>
+       <p>12.	Tang, Yichen, et al. "Quick-Dry Janus Coolmax Fabric with Rapid Liquid Wicking and Extensive Liquid Diffusion Functions." <strong>Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 728.2 (2025): 138705.</p><br>
+       <p>13.	Chen, Zhihao, et al. "A “Plug-n-Play” permeable brick-based microfluidic pump." <strong>Microfluidics and Nanofluidics</strong> 29.1 (2025): 2.</p><br>
+       <p>14.	Zhang,Ying, et al."Wrist ball plasma separation device for high quality microscale plasma separation."<strong>Sensors and Actuators: B. Chemical</strong> 15.2 (2026): 139181</p><br>
+       <p>15.	Wang,Heng, et al."Pressure-activated Janus insole with high reverse breakthrough pressure for effective foot sweat regulation."<strong>Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 5.3 (2026): 139187</p><br>
+          </section>
+
+            <section id="y2024" style="margin-bottom: 2rem; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 2rem;">
+                <h2 style="color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">2024年</h2>
+       <p>1.	Wang, He, et al. "Multi-inspired bump-liked medical protective clothing for effectively profuse perspiration management." <strong>Chemical Engineering Journal</strong> 499 (2024): 156448.</p><br>
+       <p>2.	Min, Shuqiang, et al. "Mechanical stretching triggered smart Janus fabrics for dynamic personal moisture/heat management." <strong>Chemical Engineering Journal</strong> 495 (2024): 153241.</p><br>
+               <p>3.	Liu, Jiahao, et al. "Janus antipyretic pastes for efficient, durable and comfortable personal physical cooling." <strong>ACS Applied Materials & Interfaces</strong> 16.47 (2024): 65667-65676.</p><br>
+       <p>4.	Min, Shuqiang, et al. "Multi-inspired Janus fabrics with asymmetric coolmax patterns for rapid sweat diffusion and effective sweat-shedding." <strong>Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 686 (2024): 133300.</p><br>
+       <p>5.	Min, Shuqiang, et al. "3D wetting gradient Janus sports bras for efficient sweat removal: a strategy to improve women's sports comfort and health." <strong>Small</strong> 20.44 (2024): 2404137.</p><br>
+       <p>6.	Yu, Xiaohua, et al. "Durable Janus PDMS membrane through punching microchannels and air-plasma-induced PEG grafting." <strong>Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 703 (2024): 135255.</p><br>
+       <p>7.	Wu, Xianchang, et al. "Humidity-enhanced microfluidic plasma separation on Chinese Xuan-papers."<strong> Lab on a Chip</strong> 24.18 (2024): 4379-4389.</p><br>
+       <p>8.	Xu, Bing, et al. "Rapid and reliable POCT blood typing based on a laser identified RBC agglutination method."<strong> Analyst</strong> 150.9 (2025): 1862-1871.</p><br>
+    </section>
+
+            <section id="y2023" style="margin-bottom: 2rem; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 2rem;">
+                <h2 style="color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">2023年</h2>
+        <p>1. Zhan, Tonghuan, et al. "Microfluidic cloth-based analytical devices through simple correction pen direct-writing." <strong>Sensors and Actuators B: Chemical</strong> 375 (2023): 132947.</p><br>
+       <p>2. Gao, Song, et al. "Mold embossing-based Soft Lithography for Fabrication of Complex Non-rectangular channels." <strong>ACS Applied Materials & Interfaces</strong> 15.26 (2023): 31755-31764.</p><br>
+       <p>3. Zhou, Wei, et al. "Highly durable Janus fabrics based on transfer prints for personal moisture management."<strong> Small </strong>19.36 (2023): 2302512.</p><br>
+       <p>4. Min, Shuqiang, et al. "Rapid and easily identifiable blood typing on microfluidic cotton thread-based analytical devices."<strong> Lab on a Chip</strong> 23.21 (2023): 4680-4689.</p><br>
+       <p>5. Xu, Bing, et al. "Multi-pores Janus paper with unidirectional liquid transport property toward information encryption/decryption." <strong>Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 664 (2023): 131133.</p><br>
+       <p>6. Xu, Bing, et al. "Multi-bioinspired Janus-shedding fabric: One-way sweat transport and rapid sweat removal for improved personal moisture management."<strong> Colloids and Surfaces A: Physicochemical and Engineering Aspects</strong> 675 (2023): 131974.</p><br>
+    </section>
+
+            <section id="y2022" style="margin-bottom: 2rem; background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 2rem;">
+                <h2 style="color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">2022年</h2>
+        <p>1. Xu, Bing, et al. "Directional sweat transport of monolayered cotton-fabrics fabricated through femtosecond-laser induced hydrophilization for personal moisture and thermal management."<strong> Journal of Colloid and Interface Science</strong> 628 (2022): 417-425.</p><br>
+       <p>2. Xu, Bing, et al. "Multifunctional microfluidic “Particle diode”: One-way particle transport and particle filtration." <strong>Sensors and Actuators B: Chemical</strong> 367 (2022): 132029.</p><br>
+              <p>3. Xu, Bing, et al. "High-performance blood plasma separation based on a Janus membrane technique and RBC agglutination reaction." <strong>Lab on a Chip</strong> 22.22 (2022): 4382-4392.</p><br>
+       <p>4. Li, Ang, et al. "Ultrathin silicon nitride membrane with slit-shaped pores for high-performance separation of circulating tumor cells." <strong>Lab on a Chip</strong> 22.19 (2022): 3676-3686.</p><br>
+       <p>5. Xu, Bing, et al. "Hydrophilic/Hydrophobic SiO2 Nanoparticles Enabled Janus‐Type Paper through Commercial Glaco Spraying and Air‐Plasma Treatment."<strong> Advanced Materials Interfaces</strong> 9.21 (2022): 2200934.</p><br>
+       <p>6. Xu, Bing, et al. "Wax Direct‐Writing of Monolayered Janus Fabrics for Personal Moisture Management."<strong> Advanced Materials Interfaces</strong> 9.15 (2022): 2200438.</p><br>
+       
+    </section>
+
+        </div>
+
+        <!-- 右侧：年份导航（sticky 固定） -->
+        <div class="right-panel">
+            <div class="sidebar" style="background: #94ACB3; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 2rem; white-space: nowrap;">
+                <h3 style="color: #FFEC50; margin-bottom: 0.5rem;">科研成果</h3>
+                <hr style="margin: 1rem 0; border: none; border-top: 1px solid #FFEC50;">
+                <a href="#y2026" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2026年</a>
+                <a href="#y2025" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2025年</a>
+                <a href="#y2024" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2024年</a>
+                <a href="#y2023" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2023年</a>
+                <a href="#y2022" style="display: block; margin-top: 1rem; color: #ffffff; font-weight: bold;">2022年</a>
+            </div>
+        </div>
+    </div>
+ <!-- 底部蓝色条 -->
+    <footer>
+        <div class="container footer-content">
+            <p><strong>苏州科技大学  Janus/微流控实验室</strong></p>
+            <p>地址：苏州市滨河路298号   联系电话：18856923509</p>
+        </div>
+    </footer>
+</body>
+</html>
